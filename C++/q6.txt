@@ -1,0 +1,131 @@
+/*6.	Create class Person which contains data member as Passport_Id, 
+Person_name, Nationality, Gender, Date_of_Birth, Date_of_Issue, Date_of_expiry. 
+Write a c++ program to perform following member functions: 
+i.	Enter details of all persons 
+ii.	Display passport details of one person 
+iii.	Display passport details of all persons 
+(Use Function overloading and Array of object). 
+
+*/
+
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Person {
+private:
+    string Passport_Id;
+    string Person_name;
+    string Nationality;
+    string Gender;
+    string Date_of_Birth;
+    string Date_of_Issue;
+    string Date_of_Expiry;
+
+public:
+
+    void enterDetails() 
+    {
+        cout << "\nEnter Passport Id: ";
+        cin >> Passport_Id;
+
+        cout << "Enter Person Name: ";
+        cin >> Person_name;
+
+        cout << "Enter Nationality: ";
+        cin >> Nationality;
+
+        cout << "Enter Gender: ";
+        cin >> Gender;
+
+        cout << "Enter Date of Birth (dd/mm/yyyy): ";
+        cin >> Date_of_Birth;
+
+        cout << "Enter Date of Issue (dd/mm/yyyy): ";
+        cin >> Date_of_Issue;
+
+        cout << "Enter Date of Expiry (dd/mm/yyyy): ";
+        cin >> Date_of_Expiry;
+    }
+
+   
+    void displayDetails() 
+    {
+        cout << "\n--- Passport Details ---\n";
+        cout << "Passport Id   : " << Passport_Id << endl;
+        cout << "Name          : " << Person_name << endl;
+        cout << "Nationality   : " << Nationality << endl;
+        cout << "Gender        : " << Gender << endl;
+        cout << "Date of Birth : " << Date_of_Birth << endl;
+        cout << "Date of Issue : " << Date_of_Issue << endl;
+        cout << "Date of Expiry: " << Date_of_Expiry << endl;
+    }
+
+    
+    void displayDetails(int index, Person persons[]) 
+    {
+        cout << "\n--- Passport Details of Person " << (index + 1) << " ---\n";
+        persons[index].displayDetails();
+    }
+
+    void displayDetails(int n, Person persons[], bool all) 
+    {
+        cout << "\n=== Passport Details of All Persons ===\n";
+        for (int i = 0; i < n; i++) 
+        {
+            cout << "\nPerson " << (i + 1) << ":";
+            persons[i].displayDetails();
+        }
+    }
+};
+
+int main() 
+{
+    int n;
+    cout << "Enter number of persons: ";
+    cin >> n;
+
+    Person persons[5]; 
+    for (int i = 0; i < n; i++) 
+    {
+        cout << "\nEnter details of person " << (i + 1) << ":\n";
+        persons[i].enterDetails();
+    }
+
+    int choice;
+    do {
+        cout << "\n===== MENU =====";
+        cout << "\n1. Display passport details of one person";
+        cout << "\n2. Display passport details of all persons";
+        cout << "\n3. Exit";
+        cout << "\nEnter your choice: ";
+        cin >> choice;
+
+        switch (choice) 
+        {
+            case 1: 
+                int idx;
+                cout << "Enter person index (1 - " << n << "): ";
+                cin >> idx;
+                if (idx >= 1 && idx <= n)
+                    persons[0].displayDetails(idx - 1, persons); 
+                else
+                    cout << "Invalid index!" << endl;
+                break;
+                
+            case 2:
+                persons[0].displayDetails(n, persons, true); 
+                break;
+
+            case 3:
+                cout << "Exiting program..." << endl;
+                break;
+
+            default:
+                cout << "Invalid choice!" << endl;
+        }
+    } while (choice != 3);
+
+    return 0;
+}

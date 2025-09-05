@@ -1,0 +1,49 @@
+/*1.	Write a C++ program to calculate area of 
+cone, sphere and circle by using function overloading. */
+
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+double area(double r) 
+{
+    return 3.14 * r * r;  
+}
+
+double area(double r, char shape) 
+{
+    if (shape == 's' || shape == 'S') 
+    {
+        return 4 * 3.14 * r * r;  
+    }
+    return -1; 
+}
+
+double area(double r, double h) 
+{
+    double l = sqrt(r * r + h * h);  
+    return 3.14 * r * (r + l);       
+}
+
+int main() 
+{
+    double radius, height;
+
+    cout << "=== AREA CALCULATIONS USING FUNCTION OVERLOADING ===" << endl;
+
+    cout << "\nEnter radius of circle: ";
+    cin >> radius;
+    cout << "Area of Circle = " << area(radius) << endl;
+
+    cout << "\nEnter radius of sphere: ";
+    cin >> radius;
+    cout << "Surface Area of Sphere = " << area(radius, 's') << endl;
+
+    cout << "\nEnter radius of cone: ";
+    cin >> radius;
+    cout << "Enter height of cone: ";
+    cin >> height;
+    cout << "Surface Area of Cone = " << area(radius, height) << endl;
+
+    return 0;
+}

@@ -1,0 +1,78 @@
+/*4.	Create a C++ class Integer that contains one integer data member. 
+Overload following binary operators (+,-,*, /). */
+
+
+#include <iostream>
+using namespace std;
+
+class Integer 
+{
+private:
+    int num;
+
+public:
+    Integer(int n = 0) 
+    {
+        num = n;
+    }
+
+    void display() 
+    {
+        cout << num << endl;
+    }
+
+    Integer operator+(Integer obj) 
+    {
+        return Integer(num + obj.num);
+    }
+
+    Integer operator-(Integer obj) 
+    {
+        return Integer(num - obj.num);
+    }
+
+    Integer operator*(Integer obj) 
+    {
+        return Integer(num * obj.num);
+    }
+
+    Integer operator/(Integer obj) 
+    {
+        if (obj.num == 0) 
+        {
+            cout << "Error: Division by zero!" << endl;
+            return Integer(0);
+        }
+        return Integer(num / obj.num);
+    }
+};
+
+int main() 
+{
+    Integer a(200), b(50), c;
+
+    cout << "a = ";
+    a.display();
+    cout << "b = ";
+    b.display();
+
+    cout << "\n--- Operator Overloading Results ---\n";
+
+    c = a + b;
+    cout << "a + b = ";
+    c.display();
+
+    c = a - b;
+    cout << "a - b = ";
+    c.display();
+
+    c = a * b;
+    cout << "a * b = ";
+    c.display();
+
+    c = a / b;
+    cout << "a / b = ";
+    c.display();
+
+    return 0;
+}

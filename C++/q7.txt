@@ -1,0 +1,51 @@
+/*7.	Create a class Date with members as dd, mm, yyyy. Write a C++ program 
+for overloading operators >> and << to accept and display a Date. */
+
+
+#include <iostream>
+using namespace std;
+
+class Date 
+{
+private:
+    int dd, mm, yyyy;
+
+public:   
+
+    friend istream& operator>>(istream &in, Date &d);
+    friend ostream& operator<<(ostream &out, const Date &d);
+};
+
+istream& operator>>(istream &in, Date &d) 
+{
+    cout << "Enter day: ";
+    in >> d.dd;
+    cout << "Enter month: ";
+    in >> d.mm;
+    cout << "Enter year: ";
+    in >> d.yyyy;
+    return in;
+}
+
+ostream& operator<<(ostream &out, const Date &d) 
+{
+    out << d.dd << "/" << d.mm << "/" << d.yyyy;
+    return out;
+}
+
+int main() 
+{
+    Date d1, d2;
+
+    cout << "Enter first date:\n";
+    cin >> d1;
+
+    cout << "\nEnter second date:\n";
+    cin >> d2;
+
+    cout << "\n--- Dates Entered ---" << endl;
+    cout << "Date 1: " << d1 << endl;
+    cout << "Date 2: " << d2 << endl;
+
+    return 0;
+}

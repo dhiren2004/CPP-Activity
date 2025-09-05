@@ -1,0 +1,91 @@
+/*9.	Create a base class Shape. Derive three different classes 
+Circle, Rectangle and Triangle from Shape class. Write a C++ program 
+to calculate area of Circle, Rectangle and Triangle. (Use pure virtual function). */
+
+
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+class Shape 
+{
+public:
+    virtual double area() = 0;
+};
+
+class Circle : public Shape 
+{
+private:
+    double radius;
+public:
+    Circle(double r) 
+    {
+        radius = r;
+    }
+
+    double area() 
+    {
+        return 3.14 * radius * radius;
+    }
+};
+
+class Rectangle : public Shape 
+{
+private:
+    double length, breadth;
+public:
+    Rectangle(double l, double b) 
+    {
+        length = l;
+        breadth = b;
+    }
+
+    double area() 
+    {
+        return length * breadth;
+    }
+};
+
+class Triangle : public Shape 
+{
+private:
+    double base, height;
+public:
+    Triangle(double b, double h) 
+    {
+        base = b;
+        height = h;
+    }
+
+    double area() 
+    {
+        return 0.5 * base * height;
+    }
+};
+
+int main() 
+{
+    Shape *s;   
+
+    double r, l, b, h;
+
+    cout << "Enter radius of circle: ";
+    cin >> r;
+    Circle c(r);
+    s = &c;
+    cout << "Area of Circle = " << s->area() << endl;
+
+    cout << "\nEnter length and breadth of rectangle: ";
+    cin >> l >> b;
+    Rectangle rect(l, b);
+    s = &rect;
+    cout << "Area of Rectangle = " << s->area() << endl;
+
+    cout << "\nEnter base and height of triangle: ";
+    cin >> b >> h;
+    Triangle t(b, h);
+    s = &t;
+    cout << "Area of Triangle = " << s->area() << endl;
+
+    return 0;
+}

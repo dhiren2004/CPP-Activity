@@ -1,0 +1,58 @@
+/*3.	Write a C++ program to create a class Integer. Write a C++ program to implement 
+necessary member functions to overload the operator unary pre and 
+post decrement ‘--’ for an integer number. */
+
+
+
+#include <iostream>
+using namespace std;
+
+class Integer 
+{
+private:
+    int num;
+
+public:
+    Integer(int n = 0) 
+    {
+        num = n;
+    }
+
+    void display() 
+    {
+        cout << "Value: " << num << endl;
+    }
+
+    Integer operator--() 
+    {
+        --num;                		// pre-decrement
+        return Integer(num);  	// return updated object
+    }
+
+    Integer operator--(int) 
+    {
+        Integer temp(num);    	// save old value
+        num--;                		// then decrement
+        return temp;          	// return old object
+    }
+};
+
+int main() 
+{
+    Integer i1(10),i2;
+
+    cout << "Initial Value:" << endl;
+    i1.display();
+
+    cout << "\nAfter Pre-decrement (--i):" << endl;
+    i2=--i1;  // pre-decrement
+    i2.display();
+    i1.display();
+
+    cout << "\nAfter Post-decrement (i--):" << endl;
+    i2=i1--;  // post-decrement
+    i2.display();
+    i1.display();
+
+    return 0;
+}

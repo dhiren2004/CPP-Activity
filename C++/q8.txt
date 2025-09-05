@@ -1,0 +1,105 @@
+/*8.	Create a class MyString which contains a character pointer 
+(using new operator). Write a C++ program to overload following operators: 
+i.	< To compare length of two strings 
+ii.	!= To check equality of two strings 
+iii.	+ To concatenate two strings 
+*/
+
+
+
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+class MyString 
+{
+private:
+    char *str;   
+    int length;  
+
+public:
+    MyString(const char *s = "") 
+    {
+        length = strlen(s);
+        str = new char[length + 1];
+        strcpy(str, s);
+    }
+
+    MyString(const MyString &s) 
+    {
+        length = s.length;
+        str = new char[length + 1];
+        strcpy(str, s.str);
+    }
+
+    MyString& operator=(const MyString &s) 
+    {
+        delete[] str;  
+        length = s.length;
+        str = new char[length + 1];
+        strcpy(str, s.str);
+        return *this;
+    }
+
+    ~MyString() 
+    {
+        delete[] str;
+    }
+
+    bool operator<(const MyString &s) 
+    {
+        return length < s.length;
+    }
+
+    bool operator!=(const MyString &s) 
+    {
+        return strcmp(str, s.str) != 0;
+    }
+
+    MyString operator+(const MyString &s) 
+    {
+        MyString temp("");   
+
+        temp.length = length + s.length;
+        delete[] temp.str;   
+        temp.str = new char[temp.length + 1];
+
+        strcpy(temp.str, str);
+        strcat(temp.str, s.str);
+
+        return temp;
+    }
+
+    void display() 
+    {
+        cout << str;
+    }
+};
+
+int main() {
+    MyString s1("Hello");
+    MyString s2("World");
+    MyString s3;
+
+    cout << "String 1: ";
+    s1.display();
+    cout << "\nString 2: ";
+    s2.display();
+
+    if (s1 < s2)
+        cout << "\n\nString 1 is shorter than String 2";
+    else
+        cout << "\n\nString 1 is not shorter than String 2";
+
+    if (s1 != s2)
+        cout << "\nStrings are not equal";
+    else
+        cout << "\nStrings are equal";
+
+    s3 = s1 + s2;   
+    cout << "\nConcatenated String: ";
+    s3.display();
+
+    cout << endl;
+    return 0;
+}

@@ -1,0 +1,65 @@
+/*2.	Create a C++ class Employee with data members E_no, E_Name, Designation and Salary. 
+Accept two employees information and display information of employee 
+having maximum salary. (Use this pointer) */
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Employee 
+{
+private:
+    int E_no;
+    string E_Name;
+    string Designation;
+    double Salary;
+
+public:
+    
+    void accept() 
+    {
+        cout << "\nEnter Employee Number: ";
+        cin >> E_no;
+        cout << "Enter Employee Name: ";
+        cin >> E_Name;
+        cout << "Enter Designation: ";
+        cin >> Designation;
+        cout << "Enter Salary: ";
+        cin >> Salary;
+    }
+
+    void display() 
+    {
+        cout << "\nEmployee Number : " << E_no;
+        cout << "\nEmployee Name   : " << E_Name;
+        cout << "\nDesignation     : " << Designation;
+        cout << "\nSalary          : " << Salary << endl;
+    }
+
+    Employee & compareSalary(Employee &emp) 
+    {
+        if (Salary >= emp.Salary)
+            return *this;
+        else
+            return emp;
+    }
+};
+
+int main() 
+{
+    Employee e1, e2, maxEmp;
+
+    cout << "Enter details of Employee 1:" << endl;
+    e1.accept();
+
+    cout << "\nEnter details of Employee 2:" << endl;
+    e2.accept();
+
+    maxEmp = e1.compareSalary(e2);
+
+    cout << "\nEmployee with Maximum Salary is: ";
+    maxEmp.display();
+
+    return 0;
+}
+
